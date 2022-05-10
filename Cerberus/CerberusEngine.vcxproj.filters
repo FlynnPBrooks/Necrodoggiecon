@@ -61,19 +61,19 @@
     <ClCompile Include="Dependencies\Microsoft\DirectXHelpers.cpp" />
     <ClCompile Include="Game\TestUI.cpp" />
     <ClCompile Include="Game\AI\CAICharacter.cpp" />
-    <ClCompile Include="Game\Items\CEquippedItem.cpp">
+    <ClCompile Include="Game\CEquippedItem.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Items\CDroppedItem.cpp">
+    <ClCompile Include="Game\CDroppedItem.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Items\ItemDatabase.cpp">
+    <ClCompile Include="Game\ItemDatabase.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Items\testEquippedItem.cpp">
+    <ClCompile Include="Game\testEquippedItem.cpp">
       <Filter>Item\test</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Items\testItemData.cpp">
+    <ClCompile Include="Game\testItemData.cpp">
       <Filter>Item\test</Filter>
     </ClCompile>
     <ClCompile Include="Core\Components\CAudioEmitterComponent.cpp" />
@@ -149,7 +149,7 @@
     <ClInclude Include="Game\testClass.h">
       <Filter>Player\testing</Filter>
     </ClInclude>
-    <ClInclude Include="Game\IInputable.h">
+    <ClInclude Include="Core\Environment\IInputable.h">
       <Filter>Player\testing</Filter>
     </ClInclude>
     <ClInclude Include="Game\TestUI.h" />
@@ -158,16 +158,16 @@
     <ClInclude Include="Core\Utility\InputManager\InputManager.h" />
     <ClInclude Include="Core\Utility\Audio\CEmitter.h" />
     <ClInclude Include="Core\Components\CAudioEmitterComponent.h" />
-    <ClInclude Include="Game\Items\ItemData.h">
+    <ClInclude Include="Game\ItemData.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Items\CEquippedItem.h">
+    <ClInclude Include="Game\CEquippedItem.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Items\CDroppedItem.h">
+    <ClInclude Include="Game\CDroppedItem.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Items\ItemDatabase.h">
+    <ClInclude Include="Game\ItemDatabase.h">
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="Dependencies\Microsoft\WICTextureLoader.h" />
@@ -176,10 +176,10 @@
     <ClInclude Include="Dependencies\Microsoft\PlatformHelpers.h" />
     <ClInclude Include="Dependencies\Microsoft\LoaderHelpers.h" />
     <ClInclude Include="Dependencies\Microsoft\DDS.h" />
-    <ClInclude Include="Game\Items\testItemData.h">
+    <ClInclude Include="Game\testItemData.h">
       <Filter>Item\test</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Items\testEquippedItem.h">
+    <ClInclude Include="Game\testEquippedItem.h">
       <Filter>Item\test</Filter>
     </ClInclude>
     <ClInclude Include="Core\Utility\CollisionManager\CollisionComponent.h" />
@@ -187,8 +187,6 @@
     <ClInclude Include="Tools\CT_EditorGrid.h" />
     <ClInclude Include="Core\Environment\CGridCursor.h" />
     <ClInclude Include="Tools\CT_EditorWindows.h" />
-    <ClInclude Include="Game\Items\EquippableItemData.h" />
-    <ClInclude Include="Game\Items\PickupItemData.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Tutorial01.rc" />

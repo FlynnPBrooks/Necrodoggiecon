@@ -2,7 +2,6 @@
 #include "ItemDatabase.h"
 #include "ItemData.h"
 #include "CEquippedItem.h"
-#include <Game/CCharacter.h>
 
 CDroppedItem::CDroppedItem()
 {
@@ -12,10 +11,9 @@ CDroppedItem::~CDroppedItem()
 {
 }
 
-void CDroppedItem::OnEquip(CCharacter* owner)
+CEquippedItem* CDroppedItem::OnEquip(CEntity* owner)
 {
-	if (itemData->GetItemType() == ItemType::EQUIPPABLE)
-		owner->Equip(ItemDatabase::CreateEquippedItemFromID(itemID, owner));
+	return ItemDatabase::CreateEquippedItemFromID(itemID, owner);
 }
 
 void CDroppedItem::Initialise(int id)

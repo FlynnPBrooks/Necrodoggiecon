@@ -1,6 +1,6 @@
 #include "testCharacter.h"
-#include "Items/CDroppedItem.h"
-#include "Items/CEquippedItem.h"
+#include "CDroppedItem.h"
+#include "CEquippedItem.h"
 
 testCharacter::testCharacter()
 {
@@ -34,7 +34,7 @@ void testCharacter::PressedInteract()
 {
 	if (droppedItem == nullptr) return;
 
-	droppedItem->OnEquip(this);
+	equippedItem = droppedItem->OnEquip(this);
 	Engine::DestroyEntity(droppedItem);
 	droppedItem = nullptr;
 }

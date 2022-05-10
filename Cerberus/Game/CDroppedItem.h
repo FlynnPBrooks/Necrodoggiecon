@@ -3,7 +3,6 @@
 #include <CEntity.h>
 
 class CEquippedItem;
-class CCharacter;
 struct ItemData;
 
 class CDroppedItem : public CEntity
@@ -17,7 +16,7 @@ public:
 	CDroppedItem();
 	~CDroppedItem();
 
-	virtual void OnEquip(CCharacter* owner);
+	virtual CEquippedItem* OnEquip(CEntity* owner);
 	int  GetID() { return itemID; }
 
 	virtual void Initialise(int id);
