@@ -17,5 +17,7 @@ public:
 	// Inherited via IInputable
 	virtual void PressedInteract() override;
 	virtual void PressedDrop() override;
+	virtual  void PressedInvisible() override;
+
 };
 

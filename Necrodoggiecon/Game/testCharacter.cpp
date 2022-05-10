@@ -40,7 +40,7 @@ void testCharacter::PressedInteract()
 {
 	if (droppedItem == nullptr) return;
 
-	droppedItem->OnEquip(this);
+	droppedItem->OnInteract(this);
 	droppedItem = nullptr;
 }
 
@@ -50,6 +50,15 @@ void testCharacter::PressedDrop()
 
 	droppedItem = equippedItem->Drop();
 	equippedItem = nullptr;
+}
+
+
+void testCharacter::PressedInvisible()
+{
+	if (droppedItem == nullptr) return;
+
+	droppedItem->OnInteract(this);
+	droppedItem = nullptr;
 }
 
 void testCharacter::Update(float deltaTime)

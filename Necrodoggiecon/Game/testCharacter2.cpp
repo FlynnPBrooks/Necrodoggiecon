@@ -35,3 +35,7 @@ void testCharacter2::PressedInteract()
 void testCharacter2::PressedDrop()
 {
 }
+
+void testCharacter2::PressedInvisible()
+{
+}

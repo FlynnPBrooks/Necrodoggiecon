@@ -14,7 +14,7 @@ CDroppedItem::~CDroppedItem()
 {
 }
 
-void CDroppedItem::OnEquip(CCharacter* owner)
+void CDroppedItem::OnInteract(CCharacter* owner)
 {
 	if (itemData->GetItemType() == ItemType::EQUIPPABLE)
 		owner->Equip(ItemDatabase::CreateEquippedItemFromID(itemID, owner));

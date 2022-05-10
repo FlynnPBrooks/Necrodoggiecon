@@ -17,7 +17,7 @@ public:
 	CDroppedItem();
 	~CDroppedItem();
 
-	virtual void OnEquip(CCharacter* owner);
+	virtual void OnInteract(CCharacter* owner);
 
 	int  GetID() { return itemID; }
 

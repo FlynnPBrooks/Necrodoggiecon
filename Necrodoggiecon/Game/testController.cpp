@@ -30,6 +30,9 @@ void testController::HandleInput(float deltaTime)
 		inputable->PressedInteract();
 	if (Inputs::InputManager::IsKeyPressedDown(Inputs::InputManager::G))
 		inputable->PressedDrop();
+	if (Inputs::InputManager::IsKeyPressedDown(Inputs::InputManager::I))
+		inputable->PressedInvisible();
+
 
 
 	if (Inputs::InputManager::IsKeyPressedDown(Inputs::InputManager::Q))

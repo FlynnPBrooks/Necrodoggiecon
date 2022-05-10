@@ -33,6 +33,7 @@ public:
 	void PressedVertical(int dir, float deltaTime) override;
 	void PressedInteract() override;
 	void PressedDrop() override;
+	void PressedInvisible() override;
 	virtual void Update(float deltaTime) override;
 
 	virtual void HasCollided(CollisionComponent* collidedObject) override;
