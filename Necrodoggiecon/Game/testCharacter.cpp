@@ -1,6 +1,7 @@
 #include "testCharacter.h"
 #include "CDroppedItem.h"
 #include "CEquippedItem.h"
+#include "PickupItemData.h"
 
 testCharacter::testCharacter()
 {
@@ -34,7 +35,7 @@ void testCharacter::PressedInteract()
 {
 	if (droppedItem == nullptr) return;
 
-	equippedItem = droppedItem->OnEquip(this);
+	droppedItem->OnEquip(this);
 	Engine::DestroyEntity(droppedItem);
 	droppedItem = nullptr;
 }
@@ -64,6 +65,30 @@ void testCharacter::HasCollided(CollisionComponent* collidedObject)
 {
 	if (collidedObject->GetName() == "Wall")
 		Debug::Log("Player has collided with a wall");
+}
+
+void testCharacter::Pickup(PickupItemData* itemToPickup)
+{
+	switch (itemToPickup->GetPickupType())
+	{
+	case PickupType::NECRODOGGICON_PAGE:
+		Debug::Log("Pickup Necrodoggiecon Page \n");
+		break;
+	case PickupType::CHARM_SCROLL:
+		Debug::Log("Pickup Charm Scroll \n");
+		break;
+	case PickupType::INVISIBILITY_SCROLL:
+		Debug::Log("Pickup Invisibility Scroll \n");
+		break;
+	case PickupType::SEEING_SCROLL:
+		Debug::Log("Pickup Seeing Scroll \n");
+		break;
+	case PickupType::SHIELD_SCROLL:
+		Debug::Log("Pickup Shield Scroll \n");
+		break;
+	default:
+		break;
+	}
 }
 
 void testCharacter::LookAt(Vector3 pos)

@@ -7,7 +7,8 @@
 #include <Necrodoggiecon\Game\testCharacter.h>
 #include <Necrodoggiecon\Game\ItemDatabase.h>
 #include <Necrodoggiecon\Game\AI\CAIController.h>
-
+#include <EquippableItemData.h>
+#include <PickupItemData.h>
 /*
 
 TODO:
@@ -75,6 +76,8 @@ int Start()
 	testController* controller = Engine::CreateEntity<testController>();
 	testCharacter* character1 = Engine::CreateEntity<testCharacter>();
 	testCharacter* character2 = Engine::CreateEntity<testCharacter>();
+
+	ItemDatabase::AddToMap(new PickupItemData("testItem", "Resources\\birb.dds"));
 
 	CDroppedItem* droppedItem = ItemDatabase::CreateDroppedItemFromID(0);
 

@@ -24,6 +24,7 @@ public:
 	virtual void HasCollided(CollisionComponent* collidedObject) override;
 
 	CDroppedItem* droppedItem = nullptr;
-	CEquippedItem* equippedItem = nullptr;
+
+	virtual void Pickup(PickupItemData* itemToPickup) override;
 };
 

@@ -2,6 +2,9 @@
 #include "ItemDatabase.h"
 #include "ItemData.h"
 #include "CEquippedItem.h"
+#include "CCharacter.h"
+#include "PickupItemData.h"
+#include "Cerberus\Core\Engine.h"
 
 CDroppedItem::CDroppedItem()
 {
@@ -11,9 +14,15 @@ CDroppedItem::~CDroppedItem()
 {
 }
 
-CEquippedItem* CDroppedItem::OnEquip(CEntity* owner)
+void CDroppedItem::OnEquip(CCharacter* owner)
 {
-	return ItemDatabase::CreateEquippedItemFromID(itemID, owner);
+	if (itemData->GetItemType() == ItemType::EQUIPPABLE)
+		owner->Equip(ItemDatabase::CreateEquippedItemFromID(itemID, owner));
+	if (itemData->GetItemType() == ItemType::PICKUP)
+	{
+		owner->Pickup(static_cast<PickupItemData*>(itemData));
+		Engine::DestroyEntity(this);
+	}
 }
 
 void CDroppedItem::Initialise(int id)

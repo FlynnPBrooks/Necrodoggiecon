@@ -176,6 +176,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EquippableItemData.h" />
     <ClInclude Include="Game\AI\CAICharacter.h" />
     <ClInclude Include="Game\AI\CAIController.h" />
     <ClInclude Include="Game\AI\CAINode.h" />
@@ -185,8 +186,10 @@
     <ClInclude Include="Game\CPlayer.h" />
     <ClInclude Include="Game\CPlayerController.h" />
     <ClInclude Include="Game\CursorEntity.h" />
+    <ClInclude Include="Game\EquippableItemData.h" />
     <ClInclude Include="Game\ItemData.h" />
     <ClInclude Include="Game\ItemDatabase.h" />
+    <ClInclude Include="Game\PickupItemData.h" />
     <ClInclude Include="Game\testCharacter.h" />
     <ClInclude Include="Game\testCharacter2.h" />
     <ClInclude Include="Game\testClass.h" />
@@ -194,6 +197,7 @@
     <ClInclude Include="Game\testEquippedItem.h" />
     <ClInclude Include="Game\testItemData.h" />
     <ClInclude Include="Game\TestUI.h" />
+    <ClInclude Include="PickupItemData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

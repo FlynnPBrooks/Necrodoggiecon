@@ -13,3 +13,11 @@ void CCharacter::AddHorizontalMovement(int dir, float speed, float deltaTime)
 	pos.x += dir * (speed * deltaTime);
 	SetPosition(pos);
 }
+void CCharacter::Equip(CEquippedItem* itemToEquip)
+{
+	equippedItem = itemToEquip;
+}
+
+void CCharacter::Pickup(PickupItemData* itemToPickup)
+{
+}

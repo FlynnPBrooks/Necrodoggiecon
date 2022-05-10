@@ -2,6 +2,9 @@
 #include <Cerberus\Core\Components\CSpriteComponent.h>
 #include <Cerberus\Core\CEntity.h>
 
+class CEquippedItem;
+struct PickupItemData;
+
 class CCharacter : public CEntity
 {
 private:
@@ -15,10 +18,16 @@ protected:
 
 	void AddVerticalMovement(int dir, float speed, float deltaTime);
 	void AddHorizontalMovement(int dir, float speed, float deltaTime);
+
+	CEquippedItem* equippedItem = nullptr;
+
 public:
 	void ApplyDamage(float damageAmount, CEntity* damageCauser) { OnTakeDamage(damageAmount, damageCauser); }
 
 	virtual void Update(float deltaTime) { UNREFERENCED_PARAMETER(deltaTime); };
 
+	virtual void Equip(CEquippedItem* itemToEquip);
+
+	virtual void Pickup(PickupItemData* itemToPickup);
 };
 

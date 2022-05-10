@@ -4,6 +4,7 @@
 
 class CEquippedItem;
 struct ItemData;
+class CCharacter;
 
 class CDroppedItem : public CEntity
 {
@@ -16,7 +17,8 @@ public:
 	CDroppedItem();
 	~CDroppedItem();
 
-	virtual CEquippedItem* OnEquip(CEntity* owner);
+	virtual void OnEquip(CCharacter* owner);
+
 	int  GetID() { return itemID; }
 
 	virtual void Initialise(int id);

@@ -122,5 +122,17 @@
     <ClInclude Include="Game\TestUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game\EquippableItemData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PickupItemData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EquippableItemData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PickupItemData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
