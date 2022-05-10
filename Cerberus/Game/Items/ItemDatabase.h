@@ -3,7 +3,7 @@
 
 class CEquippedItem;
 class CDroppedItem;
-class CEntity;
+class CCharacter;
 
 struct ItemData;
 
@@ -18,7 +18,7 @@ protected:
 
 public:
 	static ItemData* GetItemFromID(int id);
-	static CEquippedItem* CreateEquippedItemFromID(int id, CEntity* owner);
+	static CEquippedItem* CreateEquippedItemFromID(int id, CCharacter* owner);
 	static CDroppedItem* CreateDroppedItemFromID(int id);
 
 	static void AddToMap(ItemData* dataToAdd);

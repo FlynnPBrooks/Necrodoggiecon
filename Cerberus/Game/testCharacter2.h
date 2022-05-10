@@ -1,5 +1,5 @@
 #pragma once
-#include <Environment/IInputable.h>
+#include <IInputable.h>
 #include <CCharacter.h>
 
 class testCharacter2 : public CCharacter, public IInputable

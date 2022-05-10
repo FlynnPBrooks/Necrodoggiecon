@@ -1,7 +1,7 @@
 #include "testController.h"
 #include "testCharacter.h"
-#include "ItemDatabase.h"
-#include "CEquippedItem.h"
+#include "Items/ItemDatabase.h"
+#include "Items/CEquippedItem.h"
 
 #include <CursorEntity.h>
 #include <AI/CAICharacter.h>

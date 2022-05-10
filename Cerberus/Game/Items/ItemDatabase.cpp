@@ -1,7 +1,9 @@
 #include "ItemDatabase.h"
 #include "ItemData.h"
+#include "EquippableItemData.h"
 #include "CDroppedItem.h"
 #include "CEquippedItem.h"
+#include <Game/CCharacter.h>
 
 std::map<int, ItemData*> ItemDatabase::itemDatabase = {};
 
@@ -27,14 +29,14 @@ CDroppedItem* ItemDatabase::CreateDroppedItemFromID(int id)
 	return item;
 }
 
-CEquippedItem* ItemDatabase::CreateEquippedItemFromID(int id, CEntity* owner)
+CEquippedItem* ItemDatabase::CreateEquippedItemFromID(int id, CCharacter* owner)
 {
 	ItemData* data = GetItemFromID(id);
 
-	if (data == nullptr)
+	if (data == nullptr || data->GetItemType()  != ItemType::EQUIPPABLE)
 		return nullptr;
 
-	CEquippedItem* item = data->CreateItem();
+	CEquippedItem* item = static_cast<EquippableItemData*>(data)->CreateItem();
 	item->Initialise(id, owner);
 	return item;
 }

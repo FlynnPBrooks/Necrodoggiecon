@@ -27,8 +27,8 @@
 #include "testCharacter.h"
 #include "testCharacter2.h"
 #include "testController.h"
-#include "CDroppedItem.h"
-#include "testItemData.h"
+#include "Items/CDroppedItem.h"
+#include "Items/testItemData.h"
 #include "Utility/EventSystem/EventSystem.h"
 
 #include "Utility/InputManager/InputManager.h"
