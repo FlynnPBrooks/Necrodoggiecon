@@ -77,7 +77,7 @@ int Start()
 	testCharacter* character1 = Engine::CreateEntity<testCharacter>();
 	testCharacter* character2 = Engine::CreateEntity<testCharacter>();
 
-	ItemDatabase::AddToMap(new PickupItemData("testItem", "Resources\\birb.dds"));
+	ItemDatabase::AddToMap(new PickupItemData("testItem", "Resources\\birb.dds", PickupType::INVISIBILITY_SCROLL));
 
 	CDroppedItem* droppedItem = ItemDatabase::CreateDroppedItemFromID(0);
 

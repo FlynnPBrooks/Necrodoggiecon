@@ -2,6 +2,8 @@
 #include "CDroppedItem.h"
 #include "CEquippedItem.h"
 #include "PickupItemData.h"
+#include "Cerberus/Core/Engine.h"
+#include "Cerberus/Core/Structs/CCamera.h"
 
 testCharacter::testCharacter()
 {
@@ -18,6 +20,9 @@ testCharacter::testCharacter()
 		spriteComponent->SetScale(-1, 1, 1);
 
 	timeElapsed = float(rand() / 100);
+	pickupActive = false;
+	pickupTimer = 0;
+	pickupActiveTime = 0;
 }
 
 void testCharacter::PressedHorizontal(int dir, float deltaTime)
@@ -36,7 +41,6 @@ void testCharacter::PressedInteract()
 	if (droppedItem == nullptr) return;
 
 	droppedItem->OnEquip(this);
-	Engine::DestroyEntity(droppedItem);
 	droppedItem = nullptr;
 }
 
@@ -45,7 +49,6 @@ void testCharacter::PressedDrop()
 	if (equippedItem == nullptr) return;
 
 	droppedItem = equippedItem->Drop();
-	Engine::DestroyEntity(equippedItem);
 	equippedItem = nullptr;
 }
 
@@ -59,6 +62,8 @@ void testCharacter::Update(float deltaTime)
 	LookAt(Vector3(Inputs::InputManager::mousePos.x - Engine::windowWidth * 0.5f, -Inputs::InputManager::mousePos.y + Engine::windowHeight * 0.5f, GetPosition().z));
 
 	colComponent->SetPosition(GetPosition());
+
+	PickupTimer(deltaTime);
 }
 
 void testCharacter::HasCollided(CollisionComponent* collidedObject)
@@ -69,6 +74,10 @@ void testCharacter::HasCollided(CollisionComponent* collidedObject)
 
 void testCharacter::Pickup(PickupItemData* itemToPickup)
 {
+	pickupActive = true;
+	pickupTimer = 0;
+	pickupActiveTime = itemToPickup->GetPickupTime();
+
 	switch (itemToPickup->GetPickupType())
 	{
 	case PickupType::NECRODOGGICON_PAGE:
@@ -78,6 +87,9 @@ void testCharacter::Pickup(PickupItemData* itemToPickup)
 		Debug::Log("Pickup Charm Scroll \n");
 		break;
 	case PickupType::INVISIBILITY_SCROLL:
+		visible = false;
+		pickupTimerCallback = std::bind(&testCharacter::InvisibilityCallback, this);
+		spriteComponent->shouldDraw = false;
 		Debug::Log("Pickup Invisibility Scroll \n");
 		break;
 	case PickupType::SEEING_SCROLL:
@@ -91,15 +103,36 @@ void testCharacter::Pickup(PickupItemData* itemToPickup)
 	}
 }
 
+void testCharacter::InvisibilityCallback()
+{
+	Debug::Log("invisCB");
+	visible = true;
+	spriteComponent->shouldDraw = true;
+}
+
+void testCharacter::PickupTimer(float deltaTime)
+{
+	if (!pickupActive) return;
+	
+	pickupTimer += deltaTime;
+
+	if (pickupTimer >= pickupActiveTime)
+	{
+		pickupActive = false;
+		pickupTimerCallback();
+	}
+}
+
 void testCharacter::LookAt(Vector3 pos)
 {
 	Vector3 up = { 0.0f, 1.0f, 0.0f };
 
 	Vector3 dir = pos - GetPosition();
-	auto normDir = dir.Normalize();
+	
+	auto normDir = pos.Normalize();
 
-	float dot = up.Dot(dir);
-	float det = up.x * dir.y - up.y * dir.x;
+	float dot = up.Dot(normDir);
+	float det = up.x * normDir.y - up.y * normDir.x;
 
 	SetRotation(atan2f(det, dot));
 }

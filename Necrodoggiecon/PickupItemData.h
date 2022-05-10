@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Necrodoggiecon/Game/ItemData.h>
-
+#include <functional>
 enum class PickupType
 {
 	NECRODOGGICON_PAGE,
@@ -21,8 +21,11 @@ struct PickupItemData : public ItemData
 	{
 		itemType = ItemType::PICKUP;
 	}
+
+	std::function<void()> callback;
+
 protected:
 	PickupType pickupType;
-	float pickupStrength;
-	float pickupTime;
+	float pickupStrength = 2.0f;
+	float pickupTime = 5.0f;
 };

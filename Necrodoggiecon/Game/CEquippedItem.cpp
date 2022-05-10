@@ -45,5 +45,7 @@ CDroppedItem* CEquippedItem::Drop()
 
 	auto item = ItemDatabase::CreateDroppedItemFromID(itemID);
 	item->SetPosition(GetPosition());
+	Engine::DestroyEntity(this);
+
 	return item;
 }

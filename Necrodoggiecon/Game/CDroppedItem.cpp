@@ -19,10 +19,11 @@ void CDroppedItem::OnEquip(CCharacter* owner)
 	if (itemData->GetItemType() == ItemType::EQUIPPABLE)
 		owner->Equip(ItemDatabase::CreateEquippedItemFromID(itemID, owner));
 	if (itemData->GetItemType() == ItemType::PICKUP)
-	{
 		owner->Pickup(static_cast<PickupItemData*>(itemData));
-		Engine::DestroyEntity(this);
-	}
+	
+
+	Engine::DestroyEntity(this);
+
 }
 
 void CDroppedItem::Initialise(int id)
