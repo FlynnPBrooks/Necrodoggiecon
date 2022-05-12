@@ -81,6 +81,11 @@ void testCharacter::HasCollided(CollisionComponent* collidedObject)
 		Debug::Log("Player has collided with a wall");
 }
 
+
+/*
+Checks the pickup item type and activates the functionality for that pickup.
+E.g, Invisibility scroll will make the player invisible and bind a callback to the timer to make the player visible after a certain amount of time.
+*/
 void testCharacter::Pickup(PickupItemData* itemToPickup)
 {
 	pickupActive = true;

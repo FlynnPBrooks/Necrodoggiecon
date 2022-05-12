@@ -22,8 +22,6 @@ struct PickupItemData : public ItemData
 		itemType = ItemType::PICKUP;
 	}
 
-	std::function<void()> callback;
-
 protected:
 	PickupType pickupType;
 	float pickupStrength = 2.0f;
