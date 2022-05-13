@@ -18,7 +18,7 @@ void CCharacter::AddVerticalMovement(int dir, float speed, float deltaTime)
 	pos.y += dir * (speed * deltaTime);
 	SetPosition(pos);
 }
-/*
+/** 
 * Function to add vertical movement to the character
 * dir is the direction on the y axis that the character will move 
 * speed is how fast to move the character
@@ -30,7 +30,7 @@ void CCharacter::AddHorizontalMovement(int dir, float speed, float deltaTime)
 	pos.x += dir * (speed * deltaTime);
 	SetPosition(pos);
 }
-/*
+/** 
 * Function used to equip items to the character
 * itemToEquip will become the characters equippedItem
 */
@@ -40,7 +40,7 @@ void CCharacter::Equip(CEquippedItem* itemToEquip)
 
 	equippedItem = itemToEquip;
 }
-/*
+/** 
 * Virtual function used to determine how a character will interact with various pickups.
 */
 void CCharacter::UsePickup(PickupItemData* itemToPickup)

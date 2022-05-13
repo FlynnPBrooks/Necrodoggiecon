@@ -11,7 +11,7 @@ private:
 protected:
 	CSpriteComponent* spriteComponent = nullptr;
 
-	/*
+	/** 
 	* Virtual function 
 	* Called when the Character takes damage
 	* Used for custom functionality on inherited classes
@@ -27,7 +27,7 @@ protected:
 	CEquippedItem* equippedItem = nullptr;
 
 public:
-	/*
+	/** 
 	* Public function used to apply damage to the character
 	*/
 	void ApplyDamage(float damageAmount, CEntity* damageCauser) { OnTakeDamage(damageAmount, damageCauser); }

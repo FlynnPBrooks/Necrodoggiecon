@@ -38,19 +38,8 @@ void testController::HandleInput(float deltaTime)
 		inputable->PressedInteract();
 	if (Inputs::InputManager::IsKeyPressedDown(Inputs::InputManager::G))
 		inputable->PressedDrop();
-	if (Inputs::InputManager::IsKeyPressedDown(Inputs::InputManager::I))
-		inputable->PressedUse();
-
-
-
 	if (Inputs::InputManager::IsKeyPressedDown(Inputs::InputManager::Q))
-	{
-		//EquippedItem* item = ItemDatabase::Instance()->CreateItemFromID(0);
-		//testCharacter* item = Engine::CreateEntity<testCharacter>();
-		CursorEntity* item = Engine::CreateEntity<CursorEntity>();
-		//CAICharacter* item = Engine::CreateEntity<CAICharacter>();
-		item->SetPosition(Vector3((float(rand() % Engine::windowWidth) - Engine::windowWidth / 2), (float(rand() % Engine::windowHeight) - Engine::windowHeight / 2), 0));
-	}
+		inputable->PressedUse();
 }
 
 void testController::SwapChar()
@@ -73,6 +62,8 @@ void testController::SwapChar()
 */
 void testController::OnPossess()
 {
+	if (GetCharacter() != nullptr)
+
 	inputable = dynamic_cast<IInputable*>(GetCharacter());
 }
 

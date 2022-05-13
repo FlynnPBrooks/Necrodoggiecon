@@ -23,6 +23,4 @@ struct ItemData
 	ItemType GetItemType() { return itemType; }
 protected:
 	ItemType itemType;
-
-
 };

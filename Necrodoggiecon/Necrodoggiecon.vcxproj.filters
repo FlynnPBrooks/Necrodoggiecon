@@ -60,9 +60,6 @@
     <ClCompile Include="Game\testEquippedItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\testItemData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\TestUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

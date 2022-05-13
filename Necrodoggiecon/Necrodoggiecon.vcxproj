@@ -172,7 +172,6 @@
     <ClCompile Include="Game\testClass.cpp" />
     <ClCompile Include="Game\testController.cpp" />
     <ClCompile Include="Game\testEquippedItem.cpp" />
-    <ClCompile Include="Game\testItemData.cpp" />
     <ClCompile Include="Game\TestUI.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
