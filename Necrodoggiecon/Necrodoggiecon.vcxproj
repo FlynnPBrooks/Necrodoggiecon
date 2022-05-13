@@ -157,6 +157,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CPickupItem.cpp" />
     <ClCompile Include="Game\AI\CAICharacter.cpp" />
     <ClCompile Include="Game\AI\CAIController.cpp" />
     <ClCompile Include="Game\CCharacter.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CPickupItem.h" />
     <ClInclude Include="EquippableItemData.h" />
     <ClInclude Include="Game\AI\CAICharacter.h" />
     <ClInclude Include="Game\AI\CAIController.h" />

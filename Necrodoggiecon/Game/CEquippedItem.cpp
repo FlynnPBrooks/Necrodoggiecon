@@ -10,12 +10,19 @@ CEquippedItem::CEquippedItem()
 CEquippedItem::~CEquippedItem()
 {
 }
-
+/*
+* Inherited function used to update the EquippedItem if necessary
+*/
 void CEquippedItem::Update(float deltaTime)
 {
 	UNREFERENCED_PARAMETER(deltaTime);
 }
-
+/*
+* Function used to initialise the EquippedItem with the correct ItemData 
+* Will get the ItemData from the ItemDatabase using the passed in id
+* Will then set sprite data to the data from the retrieved ItemData
+* Will then call the virtual Equip function for any necessary additional setup
+*/
 void CEquippedItem::Initialise(int id, CEntity* newOwner)
 {
 	itemID = id;

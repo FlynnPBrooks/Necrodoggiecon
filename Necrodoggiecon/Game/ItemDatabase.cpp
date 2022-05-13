@@ -9,7 +9,7 @@
 std::map<int, ItemData*> ItemDatabase::itemDatabase = {};
 
 /*
-Will return the ItemData with the associated ID if it exists, if it doesn't it returns nullptr
+* Will return the ItemData with the associated ID if it exists, if it doesn't it returns nullptr
 */
 ItemData* ItemDatabase::GetItemFromID(int id)
 {
@@ -23,7 +23,7 @@ ItemData* ItemDatabase::GetItemFromID(int id)
 
 
 /*
-Will create a new DroppedItem and initialise it with the passed in ID, if an ItemData with the ID doesn't exist it will return nullptr
+* Will create a new DroppedItem and initialise it with the passed in ID, if an ItemData with the ID doesn't exist it will return nullptr
 */
 CDroppedItem* ItemDatabase::CreateDroppedItemFromID(int id)
 {
@@ -37,21 +37,24 @@ CDroppedItem* ItemDatabase::CreateDroppedItemFromID(int id)
 	return item;
 }
 /*
-Will create a new EquippedItem and initialise it with the passed in ID, if an ItemData with the ID doesn't exist it will return nullptr
+* Will create a new EquippedItem and initialise it with the passed in ID, if an ItemData with the ID doesn't exist it will return nullptr
 */
 CEquippedItem* ItemDatabase::CreateEquippedItemFromID(int id, CCharacter* owner)
 {
 	ItemData* data = GetItemFromID(id);
 
-	if (data == nullptr || data->GetItemType() != ItemType::EQUIPPABLE)
+	if (data == nullptr)
 		return nullptr;
 
-	CEquippedItem* item = static_cast<EquippableItemData*>(data)->CreateItem();
+	EquippableItemData* equippableData = dynamic_cast<EquippableItemData*>(data);
+	if (equippableData == nullptr) return nullptr;
+
+	CEquippedItem* item = equippableData->CreateItem();
 	item->Initialise(id, owner);
 	return item;
 }
 /*
-Will add the passed in ItemData to the itemDatabase and give it a unique ID
+* Will add the passed in ItemData to the itemDatabase and give it a unique ID
 */
 void ItemDatabase::AddToMap(ItemData* dataToAdd)
 {

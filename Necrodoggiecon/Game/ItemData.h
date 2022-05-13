@@ -18,6 +18,7 @@ struct ItemData
 	{
 		ItemDatabase::AddToMap(this);
 	}
+	virtual ~ItemData() {};
 
 	ItemType GetItemType() { return itemType; }
 protected:

@@ -1,6 +1,10 @@
 #include "testEquippedItem.h"
 #include "ItemData.h"
 
+/*
+* Inherited function
+* Used to update the EquippedItem each frame
+*/
 void testEquippedItem::Update(float deltaTime)
 {
 	UNREFERENCED_PARAMETER(deltaTime);

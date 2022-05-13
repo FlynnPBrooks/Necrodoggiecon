@@ -4,13 +4,21 @@
 #include "CEquippedItem.h"
 
 #include <Necrodoggiecon\Game\CursorEntity.h>
-#include <Necrodoggiecon\Game\AI/CAICharacter.h>
 
+/*
+* Inherited function
+* Used to update the Controller each frame
+*/
 void testController::Update(float deltaTime)
 {
 	HandleInput(deltaTime);
 }
 
+/*
+* Inherited function
+* Used to handle the input that the Controller receives
+* Will pass input down to the possessed Character using the IInputable interface
+*/
 void testController::HandleInput(float deltaTime)
 {
 	if (!HasCharacter()) return;
@@ -31,7 +39,7 @@ void testController::HandleInput(float deltaTime)
 	if (Inputs::InputManager::IsKeyPressedDown(Inputs::InputManager::G))
 		inputable->PressedDrop();
 	if (Inputs::InputManager::IsKeyPressedDown(Inputs::InputManager::I))
-		inputable->PressedInvisible();
+		inputable->PressedUse();
 
 
 
@@ -59,11 +67,19 @@ void testController::SwapChar()
 	}
 }
 
+/*
+* Inherited function
+* Used to get the IInputable interface from the newly possessed character
+*/
 void testController::OnPossess()
 {
 	inputable = dynamic_cast<IInputable*>(GetCharacter());
 }
 
+/*
+* Inherited function
+* Used to remove the IInputable interface
+*/
 void testController::OnUnpossess()
 {
 	inputable = nullptr;

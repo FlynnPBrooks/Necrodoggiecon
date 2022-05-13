@@ -22,8 +22,6 @@ public:
 	int  GetID() { return itemID; }
 
 	virtual void Initialise(int id);
-
-	// Inherited via CEntity
 	virtual void Update(float deltaTime) override;
 };
 

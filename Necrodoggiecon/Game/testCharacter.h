@@ -33,14 +33,14 @@ public:
 	void PressedVertical(int dir, float deltaTime) override;
 	void PressedInteract() override;
 	void PressedDrop() override;
-	void PressedInvisible() override;
+	void PressedUse() override;
 	virtual void Update(float deltaTime) override;
 
 	virtual void HasCollided(CollisionComponent* collidedObject) override;
 
 	CDroppedItem* droppedItem = nullptr;
 
-	virtual void Pickup(PickupItemData* itemToPickup) override;
+	virtual void UsePickup(PickupItemData* itemToPickup) override;
 
 	bool GetVisible() { return visible; }
 };

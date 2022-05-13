@@ -36,6 +36,6 @@ void testCharacter2::PressedDrop()
 {
 }
 
-void testCharacter2::PressedInvisible()
+void testCharacter2::PressedUse()
 {
 }
