@@ -1,4 +1,11 @@
 #include "CCharacter.h"
+/*****************************************************************//**
+ * \file   CCharacter.cpp
+ * \brief  Base class for Characters
+ * 
+ * \author Cathan Bertram
+ * \date   May 2022
+ *********************************************************************/
 /*
 * Function to add vertical movement to the character
 * dir is the direction on the y axis that the character will move

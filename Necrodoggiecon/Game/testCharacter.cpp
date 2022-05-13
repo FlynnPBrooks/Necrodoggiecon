@@ -24,7 +24,7 @@ testCharacter::testCharacter()
 	pickupTimer = 0;
 	pickupActiveTime = 0;
 }
-/*
+/** 
 * Function inherited from interface
 * Will use horizontal key inputs to add horizontal movement
 */
@@ -34,7 +34,7 @@ void testCharacter::PressedHorizontal(int dir, float deltaTime)
 	
 }
 
-/*
+/** 
 * Function inherited from interface
 * Will use vertical key inputs to add vertical movement
 */
@@ -43,7 +43,7 @@ void testCharacter::PressedVertical(int dir, float deltaTime)
 	AddVerticalMovement(dir, speed, deltaTime);
 }
 
-/*
+/** 
 * Function inherited from interface
 * Will interact with objects in the world if one is available
 */
@@ -55,7 +55,7 @@ void testCharacter::PressedInteract()
 	droppedItem = nullptr;
 }
 
-/*
+/** 
 * Function inherited from interface
 * Will drop the characters currently equipped item
 * Will return early if the EquippedItem is null
@@ -68,7 +68,7 @@ void testCharacter::PressedDrop()
 	equippedItem = nullptr;
 }
 
-/*
+/** 
 * Function inherited from interface
 * Will use the currently equipped item
 * First checks the item type and then uses the item appropriately
@@ -89,7 +89,7 @@ void testCharacter::PressedUse()
 	}
 }
 
-/*
+/** 
 * Inherited function
 * Used to update the character each frame
 */
@@ -107,7 +107,7 @@ void testCharacter::Update(float deltaTime)
 	PickupTimer(deltaTime);
 }
 
-/*
+/** 
 * Function used to process collisions that occur during the frame
 */
 void testCharacter::HasCollided(CollisionComponent* collidedObject)
@@ -117,7 +117,7 @@ void testCharacter::HasCollided(CollisionComponent* collidedObject)
 }
 
 
-/*
+/** 
 * Checks the pickup item type and activates the functionality for that pickup.
 * E.g, Invisibility scroll will make the player invisible and bind a callback to the timer to make the player visible after a certain amount of time.
 */
@@ -156,7 +156,7 @@ void testCharacter::UsePickup(PickupItemData* itemToPickup)
 	Engine::DestroyEntity(equippedItem);
 }
 
-/*
+/** 
 * Function used as a callback for when the invisibility pickup runs out
 */
 void testCharacter::InvisibilityCallback()
@@ -166,7 +166,7 @@ void testCharacter::InvisibilityCallback()
 	spriteComponent->shouldDraw = true;
 }
 
-/*
+/** 
 * Function used to time how long a pickup has been active and call the appropriate callback when it runs out
 */
 void testCharacter::PickupTimer(float deltaTime)

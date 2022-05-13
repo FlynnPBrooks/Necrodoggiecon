@@ -1,7 +1,7 @@
 #include "testEquippedItem.h"
 #include "ItemData.h"
 
-/*
+/** 
 * Inherited function
 * Used to update the EquippedItem each frame
 */

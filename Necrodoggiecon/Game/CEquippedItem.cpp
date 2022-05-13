@@ -2,7 +2,13 @@
 #include "ItemDatabase.h"
 #include "ItemData.h"
 #include "CDroppedItem.h"
-
+/*****************************************************************//**
+ * \file   CEquippedItem.cpp
+ * \brief  Base class for items that can be equipped.
+ *
+ * \author Cathan Bertram
+ * \date   May 2022
+ *********************************************************************/
 CEquippedItem::CEquippedItem()
 {
 }
@@ -10,14 +16,14 @@ CEquippedItem::CEquippedItem()
 CEquippedItem::~CEquippedItem()
 {
 }
-/*
+/** 
 * Inherited function used to update the EquippedItem if necessary
 */
 void CEquippedItem::Update(float deltaTime)
 {
 	UNREFERENCED_PARAMETER(deltaTime);
 }
-/*
+/** 
 * Function used to initialise the EquippedItem with the correct ItemData 
 * Will get the ItemData from the ItemDatabase using the passed in id
 * Will then set sprite data to the data from the retrieved ItemData
