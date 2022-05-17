@@ -1,7 +1,7 @@
 #pragma once
 
-#include <EquippableItemData.h>
-#include <CPickupItem.h>
+#include <Necrodoggiecon\Game\EquippableItemData.h>
+#include <Necrodoggiecon\Game\CPickupItem.h>
 
 enum class PickupType
 {

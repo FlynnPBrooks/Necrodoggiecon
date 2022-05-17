@@ -7,8 +7,8 @@
 #include <Necrodoggiecon\Game\testCharacter.h>
 #include <Necrodoggiecon\Game\ItemDatabase.h>
 #include <Necrodoggiecon\Game\AI\CAIController.h>
-#include <EquippableItemData.h>
-#include <PickupItemData.h>
+#include <Necrodoggiecon\Game\EquippableItemData.h>
+#include <Necrodoggiecon\Game\PickupItemData.h>
 /*
 
 TODO:

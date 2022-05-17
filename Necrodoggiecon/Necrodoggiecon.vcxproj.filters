@@ -63,7 +63,7 @@
     <ClCompile Include="Game\TestUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CPickupItem.cpp">
+    <ClCompile Include="Game\CPickupItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -128,13 +128,13 @@
     <ClInclude Include="Game\PickupItemData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EquippableItemData.h">
+    <ClInclude Include="Game\EquippableItemData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PickupItemData.h">
+    <ClInclude Include="Game\PickupItemData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CPickupItem.h">
+    <ClInclude Include="Game\CPickupItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
