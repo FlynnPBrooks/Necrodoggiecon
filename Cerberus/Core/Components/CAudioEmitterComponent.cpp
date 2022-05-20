@@ -1,18 +1,11 @@
-/*****************************************************************//**
- * \file   CAudioEmitterComponent.cpp
- * \brief  Allows a entity to emit audio.
- * 
- * \author Luke Whiting
- * \date   Jan 2021
- *********************************************************************/
 #include "CAudioEmitterComponent.h"
 #include "Cerberus\Core\CEntity.h"
 
 CAudioEmitterComponent::CAudioEmitterComponent()
 {
-	SetShouldUpdate(true);
-	SetShouldDraw(false);
-	SetIsUI(false);
+	shouldUpdate = true;
+	shouldDraw = false;
+	ui = false;
 
 	emitter = new CEmitter();
 }
@@ -22,11 +15,6 @@ CAudioEmitterComponent::~CAudioEmitterComponent()
 	AudioController::RemoveEmitter(emitter);
 }
 
-/**
- * Loads a audio to be used by the emitter.
- * 
- * \param path path to audio
- */
 void CAudioEmitterComponent::Load(std::string path)
 {
 	emitter->audio = AudioController::LoadAudio(path);
@@ -35,32 +23,18 @@ void CAudioEmitterComponent::Load(std::string path)
 	AudioController::AddEmitter(emitter);
 }
 
-/**
- * Sets the range at which the audio can be heard.
- * 
- * \param range hearing distance of audio.
- */
 void CAudioEmitterComponent::SetRange(float range)
 {
 	emitter->range = range;
 	emitter->audio->sound->set3DMinMaxDistance(0, range);
 }
 
-/**
- * Updates the audio emitters position.
- * 
- * \param deltaTime
- */
 void CAudioEmitterComponent::Update(float deltaTime)
 {
 	UNREFERENCED_PARAMETER(deltaTime);
 	emitter->position = this->GetParent()->GetPosition();
 }
 
-/**
- * Plays the audio emitter.
- * 
- */
 void CAudioEmitterComponent::Play()
 {
 	if (emitter->audio != nullptr)
@@ -69,10 +43,6 @@ void CAudioEmitterComponent::Play()
 		AudioController::PlayAudio(""); // Trigger Audio is not loaded error.
 }
 
-/**
- * Stops the audio emitter.
- * 
- */
 void CAudioEmitterComponent::Stop()
 {
 	if (emitter->audio != nullptr)

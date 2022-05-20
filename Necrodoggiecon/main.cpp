@@ -1,22 +1,14 @@
 #include "Cerberus\Core\Engine.h"
 #include <Cerberus\Core\Environment\CWorld.h>
-#include "Necrodoggiecon/CWorld_Game.h"
 #include "Necrodoggiecon\Game\CPlayer.h"
 #include <Necrodoggiecon\Game\TestUI.h>
 #include <Necrodoggiecon\Game\CursorEntity.h>
-#include <Necrodoggiecon\Game\PlayerController.h>
-#include <Necrodoggiecon\Game\PlayerCharacter.h>
+#include <Necrodoggiecon\Game\testController.h>
+#include <Necrodoggiecon\Game\testCharacter.h>
 #include <Necrodoggiecon\Game\ItemDatabase.h>
 #include <Necrodoggiecon\Game\AI\CAIController.h>
 #include <Necrodoggiecon\Game\EquippableItemData.h>
 #include <Necrodoggiecon\Game\PickupItemData.h>
-#include <Cerberus/Core/Structs/CCamera.h>
-#include <Cerberus/Core/Utility/CWorldManager.h>
-#include <Cerberus\Core\Components\CCameraComponent.h>
-#include "Cerberus/Core/Utility/CameraManager/CameraManager.h"
-#include <weaponUI.h>
-#include <Necrodoggiecon\Game\CInteractable.h>
-
 /*
 
 TODO:
@@ -76,47 +68,35 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 // Called once at the start of the application run.
 int Start() 
 {
+	Engine::CreateEntity<TestUI>();
+	Engine::CreateEntity<CursorEntity>();
 
-	CInteractable* interactable = Engine::CreateEntity<CInteractable>();
+	CWorld::LoadWorld(0);
 
-	interactable->SetPosition(-500, 0, 0);
-
-	// Free Camera not locked to player.
-	CCamera* freeCamera = Engine::CreateEntity<CCamera>();
-	CCameraComponent* freeCameraComponent = freeCamera->AddComponent<CCameraComponent>();
-	freeCameraComponent->Initialize();
-	freeCameraComponent->SetAttachedToParent(false);
-
-	CameraManager::AddCamera(freeCameraComponent);
-
-	CWorldManager::LoadWorld(new CWorld_Game(0));
-
-	
-
-	CEntity* t = Engine::CreateEntity<weaponUI>();
-	t->SetPosition(XMFLOAT3(0, 0, -90));
-	t = Engine::CreateEntity<TestUI>();
-	t->SetPosition(XMFLOAT3(0, 0, -100));
-	t = Engine::CreateEntity<CursorEntity>();
-	t->SetPosition(XMFLOAT3(0, 0, -110));
+	testController* controller = Engine::CreateEntity<testController>();
+	testCharacter* character1 = Engine::CreateEntity<testCharacter>();
+	testCharacter* character2 = Engine::CreateEntity<testCharacter>();
 
 	ItemDatabase::AddToMap(new PickupItemData("testItem", "Resources\\birb.dds", PickupType::INVISIBILITY_SCROLL));
 
 	CDroppedItem* droppedItem = ItemDatabase::CreateDroppedItemFromID(0);
 
 	//character1->SetPosition(Vector3((float(rand() % Engine::windowWidth) - Engine::windowWidth / 2), (float(rand() % Engine::windowHeight) - Engine::windowHeight / 2), 0));
-	//character1->droppedItem = droppedItem;
+	character1->droppedItem = droppedItem;
 
-	//controller->charOne = character1;
+	character2->SetPosition(Vector3((float(rand() % Engine::windowWidth) - Engine::windowWidth / 2), (float(rand() % Engine::windowHeight) - Engine::windowHeight / 2), 0));
 
-//	character1->SetPosition(Vector3(0, 0, 0));
-	//controller->Possess(character1);
-	//character1->shouldMove = true;
-	//character1->colComponent->SetCollider(128.0f, 128.0f);
+	controller->charOne = character1;
+	controller->charTwo = character2;
+
+	character1->SetPosition(Vector3(0, 0, 0));
+	controller->Possess(character1);
+	character1->shouldMove = true;
+	character1->colComponent->SetCollider(128.0f, 128.0f);
 
 	Engine::CreateEntity<CAIController>();
 
-	std::vector<PlayerCharacter*> test = Engine::GetEntityOfType<PlayerCharacter>();
+	std::vector<testCharacter*> test = Engine::GetEntityOfType<testCharacter>();
 
 	return 0;
 }

@@ -3,26 +3,22 @@
 CEntity::~CEntity()
 {
 	for (auto& e : components)
-	{
-		EntityManager::RemoveComponent(e);
-
 		delete e;
-	}
 }
 
 void CEntity::RemoveComponent(CComponent* reference)
 {
-	EntityManager::RemoveComponent(reference);
-
-	for (size_t i = 0; i < components.size(); i++)
 	{
-		CComponent* component = components[i];
-
-		if (component == reference)
+		for (size_t i = 0; i < components.size(); i++)
 		{
-			components.erase(components.begin() + i);
-			delete component;
-			return;
+			CComponent* component = components[i];
+
+			if (component == reference)
+			{
+				components.erase(components.begin() + i);
+				delete component;
+				return;
+			}
 		}
 	}
 }

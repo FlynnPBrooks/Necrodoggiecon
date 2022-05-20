@@ -12,15 +12,6 @@
 * speed is how fast to move the character
 * deltaTime is used to ensure the character will move at a consistent speed that is not dependent on frame rate
 */
-
-CCharacter::CCharacter()
-{
-}
-
-CCharacter::~CCharacter()
-{
-}
-
 void CCharacter::AddVerticalMovement(int dir, float speed, float deltaTime)
 {
 	Vector3 pos = GetPosition();

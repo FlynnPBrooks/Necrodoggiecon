@@ -22,14 +22,13 @@
 #include "Cerberus\Tools/CT_EditorMain.h"
 #include "Cerberus/Core/Utility/Audio/AudioController.h"
 #include "Cerberus/Core/Utility/EventSystem/EventSystem.h"
-#include "Core/Components/CCameraComponent.h"
 #include "Cerberus/Core/Utility/InputManager/InputManager.h"
-#include "Cerberus/Core/Components/CCameraComponent.h"
-#include "Cerberus\Core\Utility\CameraManager\CameraManager.h"
-#include "Cerberus\Core\Utility\CWorldManager.h"
 using namespace Inputs;
 #include <chrono>
 
+std::vector<CEntity*> Engine::entities = std::vector<CEntity*>();
+
+CCamera Engine::camera = CCamera();
 XMMATRIX Engine::projMatrixUI = XMMatrixIdentity();
 
 //--------------------------------------------------------------------------------------
@@ -83,12 +82,9 @@ ID3D11Texture2D* depthStencil;
 ID3D11DepthStencilView* depthStencilView;
 ID3D11RasterizerState* fillRastState;
 ID3D11RasterizerState* wireframeRastState;
-ID3D11BlendState* blendState;
-ID3D11DepthStencilState* opaqueDepthStencilState;
-ID3D11DepthStencilState* translucentDepthStencilState;
 
 DebugOutput* debugOutputUI;
-
+CT_EditorMain* EditorViewport;
 
 //--------------------------------------------------------------------------------------
 // Register class and create window
@@ -354,48 +350,6 @@ HRESULT InitDevice()
     vp.TopLeftY = 0;
     Engine::deviceContext->RSSetViewports( 1, &vp );
 
-	D3D11_BLEND_DESC blend;
-	blend.RenderTarget[0].BlendEnable = TRUE;
-	blend.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-	blend.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-	blend.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-	blend.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-	blend.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
-	blend.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
-	blend.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-	blend.IndependentBlendEnable = false;
-	blend.AlphaToCoverageEnable = false;
-	hr = Engine::device->CreateBlendState(&blend, &blendState);
-
-	if (FAILED(hr))
-		return hr;
-
-	D3D11_DEPTH_STENCIL_DESC depthStencilDesc;
-	depthStencilDesc.DepthEnable = TRUE;
-	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
-	depthStencilDesc.StencilEnable = FALSE;
-	depthStencilDesc.StencilReadMask = 0xFF;
-	depthStencilDesc.StencilWriteMask = 0xFF;
-	hr = Engine::device->CreateDepthStencilState(&depthStencilDesc, &opaqueDepthStencilState);
-
-	if (FAILED(hr))
-		return hr;
-
-	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
-
-	hr = Engine::device->CreateDepthStencilState(&depthStencilDesc, &translucentDepthStencilState);
-
-	if (FAILED(hr))
-		return hr;
-
-	Engine::deviceContext->OMSetDepthStencilState(opaqueDepthStencilState, 0);
-
-	float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-	UINT sampleMask = 0xffffffff;
-
-	Engine::deviceContext->OMSetBlendState(blendState, blendFactor, sampleMask);
-
 	D3D11_RASTERIZER_DESC fillDSC = {};
 	fillDSC.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
 	fillDSC.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
@@ -438,7 +392,7 @@ HRESULT	InitMesh()
 {
 	// Compile the vertex shader
 	ID3DBlob* pVSBlob = nullptr;
-	HRESULT hr = CompileShaderFromFile(L"Resources/Engine/Shaders/shader.fx", "VS", "vs_4_0", &pVSBlob);
+	HRESULT hr = CompileShaderFromFile(L"Resources/Shaders/shader.fx", "VS", "vs_4_0", &pVSBlob);
 	if (FAILED(hr))
 	{
 		MessageBox(nullptr,
@@ -474,7 +428,7 @@ HRESULT	InitMesh()
 
 	// Compile the pixel shader
 	ID3DBlob* pPSBlob = nullptr;
-	hr = CompileShaderFromFile(L"Resources/Engine/Shaders/shader.fx", "PS", "ps_4_0", &pPSBlob);
+	hr = CompileShaderFromFile(L"Resources/Shaders/shader.fx", "PS", "ps_4_0", &pPSBlob);
 	if (FAILED(hr))
 	{
 		MessageBox(nullptr,
@@ -488,7 +442,7 @@ HRESULT	InitMesh()
 	if (FAILED(hr))
 		return hr;
 
-	hr = CompileShaderFromFile(L"Resources/Engine/Shaders/shader.fx", "PSSolid", "ps_4_0", &pPSBlob);
+	hr = CompileShaderFromFile(L"Resources/Shaders/shader.fx", "PSSolid", "ps_4_0", &pPSBlob);
 	if (FAILED(hr))
 	{
 		MessageBox(nullptr,
@@ -523,7 +477,9 @@ HRESULT	InitWorld(int width, int height)
 	UNREFERENCED_PARAMETER(width);
 	UNREFERENCED_PARAMETER(height);
 
-	Engine::projMatrixUI = XMMatrixOrthographicLH(float(Engine::windowWidth), float(Engine::windowHeight), -1000.0f, 1000.0f);
+	Engine::projMatrixUI = XMMatrixOrthographicLH(float(Engine::windowWidth), float(Engine::windowHeight), 0.01f, 100.0f);
+	Engine::camera.UpdateProjectionMat();
+	Engine::camera.UpdateViewMat();
 
 	return S_OK;
 }
@@ -609,26 +565,20 @@ HRESULT ResizeSwapChain(XMUINT2 newSize)
 		Engine::deviceContext->RSSetViewports(1, &vp);
 
 		InitWorld(newSize.x, newSize.y);
-
-		CameraManager::GetRenderingCamera()->UpdateProj();
 	}
 
 	return hr;
 }
-
-#include <map>
 
 //--------------------------------------------------------------------------------------
 // Clean up the objects we've created
 //--------------------------------------------------------------------------------------
 void CleanupDevice()
 {
-	while (EntityManager::GetEntitiesVector()->size() > 0)
-	{
-		CEntity* e = EntityManager::GetEntitiesVector()->at(0);
-		EntityManager::RemoveEntity(e);
-		delete e;
-	}
+	for (int i = 0; i < Engine::entities.size(); i++)
+		delete Engine::entities[i];
+
+	Engine::entities.clear();
 
 	// Remove any bound render target or depth/stencil buffer
 	ID3D11RenderTargetView* nullViews[] = { nullptr };
@@ -649,9 +599,6 @@ void CleanupDevice()
     if( Engine::deviceContext ) Engine::deviceContext->Release();
 	if (fillRastState) fillRastState->Release();
 	if (wireframeRastState) wireframeRastState->Release();
-	if (blendState) blendState->Release();
-	if (opaqueDepthStencilState) opaqueDepthStencilState->Release();
-	if (translucentDepthStencilState) translucentDepthStencilState->Release();
 
 	ID3D11Debug* debugDevice = nullptr;
 	Engine::device->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&debugDevice));
@@ -694,9 +641,18 @@ double CalculateDeltaTime(const unsigned short fpsCap)
 
 void Engine::DestroyEntity(CEntity* targetEntity)
 {
-	EntityManager::RemoveEntity(targetEntity);
-
-	delete targetEntity;
+	{
+		for (size_t i = 0; i < entities.size(); i++)
+		{
+			CEntity* entity = entities[i];
+			if (entity == targetEntity)
+			{
+				entities.erase(entities.begin() + i);
+				delete entity;
+				return;
+			}
+		}
+	}
 }
 
 // Starts the engine.
@@ -751,7 +707,6 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg
 
 LRESULT Engine::ReadMessage(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	CCameraComponent* camera = CameraManager::GetRenderingCamera();
 
 	if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
 		return false;
@@ -791,7 +746,7 @@ LRESULT Engine::ReadMessage(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 
 		//TEMP
 	case WM_MOUSEWHEEL:
-		camera->SetZoomLevel(float(camera->GetZoomLevel() + GET_WHEEL_DELTA_WPARAM(wParam) * camera->GetZoomLevel() * 0.001f));
+		Engine::camera.SetZoom(float(Engine::camera.GetZoom() + GET_WHEEL_DELTA_WPARAM(wParam) * Engine::camera.GetZoom() * 0.001f));
 		break;
 
 	case WM_PAINT:
@@ -831,25 +786,25 @@ void Engine::Stop()
 
 void Update(float deltaTime)
 {
-	for (size_t i = 0; i < EntityManager::GetEntitiesVector()->size(); i++)
+	for (int i=0; i < Engine::entities.size(); i++)
 	{
-		CEntity* e = EntityManager::GetEntitiesVector()->at(i);
-		if (!e->GetShouldUpdate())
+		CEntity* e = Engine::entities[i];
+		if (!e->shouldUpdate)
 			continue;
 		
-		for (auto& f : e->GetAllComponents())
+		for (auto& f : e->components)
 		{
-			if (!f->GetShouldUpdate())
+			if (!f->shouldUpdate)
 				continue;
 
 			f->Update(deltaTime);
 		}
 		e->Update(deltaTime);
-		if (e->GetShouldMove())
+		if (e->shouldMove)
 		{
-			for (size_t j = 0; j < EntityManager::GetEntitiesVector()->size(); j++)
+			for (size_t j = 0; j < Engine::entities.size(); j++)
 			{
-				CEntity* currentEntity = EntityManager::GetEntitiesVector()->at(j);
+				CEntity* currentEntity = Engine::entities[j];
 
 				if (e != currentEntity && currentEntity->colComponent != nullptr)
 				{
@@ -872,14 +827,6 @@ void Update(float deltaTime)
 //--------------------------------------------------------------------------------------
 void Render()
 {
-	CCameraComponent* camera = CameraManager::GetRenderingCamera();
-
-	// Cant render without a rendering camera.
-	if(camera == nullptr)
-	{
-		return;
-	}
-
 	if (resizeSwapChain)
 	{
 		ResizeSwapChain(XMUINT2(Engine::windowWidth, Engine::windowHeight));
@@ -902,59 +849,28 @@ void Render()
 	else
 		Engine::deviceContext->PSSetShader(pixelShaderSolid, nullptr, 0);
 
-
-	XMFLOAT4X4 mat = camera->GetViewMatrix();
+	XMFLOAT4X4 mat = Engine::camera.view;
 	XMMATRIX viewMat = XMMatrixTranspose(XMLoadFloat4x4(&mat));
 
-	mat = camera->GetProjectionMatrix();
+	mat = Engine::camera.proj;
 	XMMATRIX projMat = XMMatrixTranspose(XMLoadFloat4x4(&mat));
 
 	// Set primitive topology
 	Engine::deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	for (size_t i = 0; i < EntityManager::GetOpaqueCompsVector()->size(); i++)
+	for (auto& e : Engine::entities) if (e->visible)
 	{
-		CComponent* c = EntityManager::GetOpaqueCompsVector()->at(i);
-		CEntity* e = c->GetParent();
-		if (e->GetVisible())
+		XMFLOAT4X4 entTransform = e->GetTransform();
+
+		for (auto& f : e->components) if (f->shouldDraw)
 		{
-			XMFLOAT4X4 entTransform = e->GetTransform();
+			ConstantBuffer cb1;
+			cb1.mView = viewMat;
+			cb1.mProjection = projMat;
 
-			if (c->GetShouldDraw())
-			{
-				ConstantBuffer cb1;
-				cb1.mView = viewMat;
-				cb1.mProjection = projMat;
-
-				c->Draw(Engine::deviceContext, entTransform, cb1, constantBuffer);
-			}
+			f->Draw(Engine::deviceContext, entTransform, cb1, constantBuffer);
 		}
 	}
-
-	EntityManager::SortTranslucentComponents();
-
-	Engine::deviceContext->OMSetDepthStencilState(translucentDepthStencilState, 0);
-
-	for (size_t i = 0; i < EntityManager::GetTranslucentCompsVector()->size(); i++)
-	{
-		CComponent* c = EntityManager::GetTranslucentCompsVector()->at(i);
-		CEntity* e = c->GetParent();
-		if (e->GetVisible())
-		{
-			XMFLOAT4X4 entTransform = e->GetTransform();
-
-			if (c->GetShouldDraw())
-			{
-				ConstantBuffer cb1;
-				cb1.mView = viewMat;
-				cb1.mProjection = projMat;
-
-				c->Draw(Engine::deviceContext, entTransform, cb1, constantBuffer);
-			}
-		}
-	}
-
-	Engine::deviceContext->OMSetDepthStencilState(opaqueDepthStencilState, 0);
 
 	// Render ImGUI.
 	ImGui_ImplDX11_NewFrame();
@@ -963,7 +879,7 @@ void Render()
 
 	// Do UI.
 	Debug::getOutput()->render();
-	if (CWorldManager::GetEditorWorld() != nullptr)CWorldManager::GetEditorWorld()->UpdateEditorViewport();
+	if (EditorViewport) EditorViewport->RenderWindows();
 
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());

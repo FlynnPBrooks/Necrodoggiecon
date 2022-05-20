@@ -17,7 +17,6 @@ public:
 	CTile();
 	CTile(int TileID, Vector3 Position);
 	class CSpriteComponent* sprite = nullptr;
-	class CSpriteComponent* debugSprite = nullptr;
 
 
 
@@ -48,12 +47,6 @@ public:
 
 	bool IsWalkable() { return isWalkable; }
 
-
-
-	void SetDebugMode(bool newState);
-
-	void UpdateDebugRender();
-
 protected: 
 
 	//Returns the tile's type, whether it be a walkable floor, a wall or a door.
@@ -62,13 +55,10 @@ protected:
 
 private: 
 
-	bool debugMode = false;
 
 	bool isWalkable = false;
 
 	void SetRenderData(int X, int Y);
-
-
 
 
 	TileType tileStatus = TileType::Floor;

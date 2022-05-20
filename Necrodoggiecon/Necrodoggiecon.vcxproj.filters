@@ -45,13 +45,16 @@
     <ClCompile Include="Game\ItemDatabase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\PlayerCharacter.cpp">
+    <ClCompile Include="Game\testCharacter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\testCharacter2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\testClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\PlayerController.cpp">
+    <ClCompile Include="Game\testController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\testEquippedItem.cpp">
@@ -61,22 +64,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\CPickupItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\weapons.cpp">
-    <ClCompile Include="Game\AI\Pathfinding.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\AI\State.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="weaponUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\CInteractable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CWorld_Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -114,13 +101,16 @@
     <ClInclude Include="Game\ItemDatabase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\PlayerCharacter.h">
+    <ClInclude Include="Game\testCharacter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\testCharacter2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\testClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\PlayerController.h">
+    <ClInclude Include="Game\testController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\testEquippedItem.h">
@@ -145,27 +135,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\CPickupItem.h">
-    <ClInclude Include="Game\weapons.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Weapons.json">
-      <Filter>Resource Files</Filter>
-    </None>
-    <ClInclude Include="Game\AI\Pathfinding.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\AI\State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="weaponUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\CInteractable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CWorld_Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

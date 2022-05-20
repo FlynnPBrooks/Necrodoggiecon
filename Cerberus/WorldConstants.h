@@ -15,9 +15,7 @@ enum class CellType
 	Edge,
 	Floor,
 	OuterCorner,
-	InnerCorner,
-	TConnector,
-	XConnector
+	InnerCorner
 };
 
 enum class CellID
@@ -37,29 +35,11 @@ enum class CellID
 	OC_SW = 12,
 	OC_SE = 13,
 
-
 	W_T = 13,
 	C_TR = 14,
-	C_TL = 15,
+	C_TL = 14
 
 
-	WC_HS = 16,
-	WC_HN = 17,
-	WC_VE = 18,
-	WC_VW = 19,
-
-
-};
-
-struct CT_PropData
-{
-	CT_PropData(int ID, int Coordinate)
-	{
-		propID = ID;
-		coordinate = Coordinate;
-	}
-	int propID;
-	Vector3 coordinate;
 };
 
 

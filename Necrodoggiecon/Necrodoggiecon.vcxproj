@@ -89,7 +89,6 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -106,7 +105,6 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -131,18 +129,8 @@
       <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;dxguid.lib;winmm.lib;comctl32.lib;$(SolutionDir)Cerberus\Dependencies\FMOD\lib\x64\fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>echo "Copying FMOD DLL \n"
-copy /y "$(SolutionDir)Cerberus\Dependencies\FMOD\lib\x64\fmod.dll" "$(OutDir)fmod.dll"
-
-echo "Copying Engine Resources \n"
-xcopy "$(SolutionDir)Cerberus\Resources" "$(ProjectDir)Resources"  /s /f /i /y
-
-echo "Copying Engine Resources to output \n"
-xcopy "$(SolutionDir)Cerberus\Resources" "$(OutDir)Resources"  /s /f /i /y
-
-echo "Copying Game Resources to output \n"
-xcopy "$(ProjectDir)Resources" "$(OutDir)Resources"  /s /f /i /y</Command>
-      <Message>Post Build Step.</Message>
+      <Command>copy /y "$(SolutionDir)Cerberus\Dependencies\FMOD\lib\x64\fmod.dll" "$(OutDir)fmod.dll"</Command>
+      <Message>Copying FMOD dll to output dir</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -154,7 +142,6 @@ xcopy "$(ProjectDir)Resources" "$(OutDir)Resources"  /s /f /i /y</Command>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -163,22 +150,6 @@ xcopy "$(ProjectDir)Resources" "$(OutDir)Resources"  /s /f /i /y</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;dxguid.lib;winmm.lib;comctl32.lib;$(SolutionDir)Cerberus\Dependencies\FMOD\lib\x64\fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>echo "Copying FMOD DLL \n"
-copy /y "$(SolutionDir)Cerberus\Dependencies\FMOD\lib\x64\fmod.dll" "$(OutDir)fmod.dll"
-
-echo "Copying Engine Resources \n"
-xcopy "$(SolutionDir)Cerberus\Resources" "$(ProjectDir)Resources"  /s /f /i /y
-
-echo "Copying Engine Resources to output \n"
-xcopy "$(SolutionDir)Cerberus\Resources" "$(OutDir)Resources"  /s /f /i /y
-
-echo "Copying Game Resources to output \n"
-xcopy "$(ProjectDir)Resources" "$(OutDir)Resources"  /s /f /i /y</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Post Build Step.</Message>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cerberus\CerberusEngine.vcxproj">
@@ -187,12 +158,8 @@ xcopy "$(ProjectDir)Resources" "$(OutDir)Resources"  /s /f /i /y</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\CPickupItem.cpp" />
-    <ClCompile Include="CWorld_Game.cpp" />
-    <ClCompile Include="Game\CInteractable.cpp" />
     <ClCompile Include="Game\AI\CAICharacter.cpp" />
     <ClCompile Include="Game\AI\CAIController.cpp" />
-    <ClCompile Include="Game\AI\Pathfinding.cpp" />
-    <ClCompile Include="Game\AI\State.cpp" />
     <ClCompile Include="Game\CCharacter.cpp" />
     <ClCompile Include="Game\CDroppedItem.cpp" />
     <ClCompile Include="Game\CEquippedItem.cpp" />
@@ -200,25 +167,20 @@ xcopy "$(ProjectDir)Resources" "$(OutDir)Resources"  /s /f /i /y</Command>
     <ClCompile Include="Game\CPlayerController.cpp" />
     <ClCompile Include="Game\CursorEntity.cpp" />
     <ClCompile Include="Game\ItemDatabase.cpp" />
-    <ClCompile Include="Game\PlayerCharacter.cpp" />
+    <ClCompile Include="Game\testCharacter.cpp" />
+    <ClCompile Include="Game\testCharacter2.cpp" />
     <ClCompile Include="Game\testClass.cpp" />
-    <ClCompile Include="Game\PlayerController.cpp" />
+    <ClCompile Include="Game\testController.cpp" />
     <ClCompile Include="Game\testEquippedItem.cpp" />
     <ClCompile Include="Game\TestUI.cpp" />
-    <ClCompile Include="Game\weapons.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="weaponUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\CPickupItem.h" />
     <ClInclude Include="Game\EquippableItemData.h" />
-    <ClInclude Include="CWorld_Game.h" />
-    <ClInclude Include="Game\CInteractable.h" />
     <ClInclude Include="Game\AI\CAICharacter.h" />
     <ClInclude Include="Game\AI\CAIController.h" />
     <ClInclude Include="Game\AI\CAINode.h" />
-    <ClInclude Include="Game\AI\Pathfinding.h" />
-    <ClInclude Include="Game\AI\State.h" />
     <ClInclude Include="Game\CCharacter.h" />
     <ClInclude Include="Game\CDroppedItem.h" />
     <ClInclude Include="Game\CEquippedItem.h" />
@@ -231,18 +193,12 @@ xcopy "$(ProjectDir)Resources" "$(OutDir)Resources"  /s /f /i /y</Command>
     <ClInclude Include="Game\PickupItemData.h" />
     <ClInclude Include="Game\testCharacter.h" />
     <ClInclude Include="Game\testCharacter2.h" />
-    <ClInclude Include="Game\PlayerCharacter.h" />
     <ClInclude Include="Game\testClass.h" />
-    <ClInclude Include="Game\PlayerController.h" />
+    <ClInclude Include="Game\testController.h" />
     <ClInclude Include="Game\testEquippedItem.h" />
     <ClInclude Include="Game\testItemData.h" />
     <ClInclude Include="Game\TestUI.h" />
     <ClInclude Include="Game\PickupItemData.h" />
-    <ClInclude Include="Game\weapons.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Weapons.json" />
-    <ClInclude Include="weaponUI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,5 @@
 #pragma once
+//#include "Cerberus\Core\CEntity.h"
 #include "Cerberus\Core\Utility\Vector3.h"
 #include "Cerberus/Core/Utility/DebugOutput/Debug.h"
 #include <thread>
@@ -11,17 +12,16 @@ enum class COLLISIONTYPE
 };
 
 
-class CEntity;
-
 //A component for collisions
 class CollisionComponent
 {
 public:
-	CollisionComponent(std::string setName, CEntity* parent);
+	CollisionComponent(std::string setName);
 
 	~CollisionComponent();
 
 	COLLISIONTYPE GetCollisionType();
+	//CEntity* test = nullptr;
 	
 	float GetRadius();
 	void SetRadius(float setRadius);
@@ -39,14 +39,9 @@ public:
 	void SetCollider(float setRadius); //Bounding circle initiation
 	void SetCollider(float setHeight, float setWidth); //Bounding Box initiation
 
+
 	bool IsColliding(CollisionComponent* collidingObject);
 	float DistanceBetweenPoints(Vector3& point1, Vector3& point2);
-
-	CEntity* GetParent();
-	void Resolve(CollisionComponent* other);
-
-	void SetTrigger(const bool value);
-	bool GetTrigger();
 
 private: 
 	float radius;
@@ -54,10 +49,6 @@ private:
 	float height;
 	float width;
 	std::string name = "none";
-
-	bool trigger = false;
-
-	CEntity* parent = nullptr;
 
 	COLLISIONTYPE collisionType = COLLISIONTYPE::BOUNDING_NONE;
 };

@@ -1,12 +1,5 @@
-/*****************************************************************//**
- * \file   CAudio.h
- * \brief  Helper class that encapsulates audio parameters for the audio system. Used to de-couple FMOD from the audio system.
- * 
- * \author Luke Whiting
- * \date   Jan 2022
- *********************************************************************/
 #pragma once
-#include "Cerberus/Dependencies/FMOD/api/core/inc/fmod.hpp"
+#include "Dependencies/FMOD/api/core/inc/fmod.hpp"
 class CAudio
 {
 public:

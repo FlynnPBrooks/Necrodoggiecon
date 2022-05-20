@@ -25,7 +25,6 @@
 
 #include "Cerberus/Core/Utility/DebugOutput/Debug.h"
 #include "Cerberus/Core/Utility/InputManager/InputManager.h"
-#include "Cerberus/Core/Utility/EntityManager.h"
 
 #include "Cerberus\Core\Structs\structures.h"
 #include "Cerberus\Resource.h"
@@ -35,7 +34,6 @@
 #define RAD2DEG 180 / PI
 
 class CEntity;
-class CCameraComponent;
 
 struct Engine
 {
@@ -47,23 +45,24 @@ struct Engine
 
 	static void Stop();
 
-	static void SetRenderCamera(CCameraComponent* cam);
+	// Drawables.
+	static std::vector<CEntity*> entities;	//Needs to be changed to CObject instead
 	
-	// Returns all entities of provided type that exist in the engine.
 	template<class T>
+	// Returns all entities of provided type that exist in the engine.
 	static std::vector<T*> GetEntityOfType() 
 	{
 		std::vector<T*> outputVector;
 
-		for (size_t i = 0; i < EntityManager::GetEntitiesVector()->size(); i++)
+		size_t vectorSize = entities.size();
+		for (size_t i = 0; i < vectorSize; i++)
 		{
-			T* e = dynamic_cast<T*>(EntityManager::GetEntitiesVector()->at(i));
-			if (e != nullptr)
-			{
-				outputVector.push_back(e);
-			}
+			T* entity = (T*)entities[i];
+			const char* evaluationEntity = typeid(*entity).name();
+			const char* searchEntity = typeid(T).name();
+			if (evaluationEntity == searchEntity)
+				outputVector.emplace_back(entity);
 		}
-
 		return outputVector;
 	};
 
@@ -74,7 +73,7 @@ struct Engine
 	static T* CreateEntity() 
 	{
 		CEntity* temp = new T();
-		EntityManager::AddEntity(temp);
+		entities.emplace_back(temp);
 		return (T*)temp;
 	};
 
@@ -90,5 +89,6 @@ struct Engine
 	static ID3D11Device* device;
 	static ID3D11DeviceContext* deviceContext;
 
+	static class CCamera camera;
 	static XMMATRIX projMatrixUI;
 };

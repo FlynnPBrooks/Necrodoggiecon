@@ -1,11 +1,3 @@
-/*****************************************************************//**
- * \file   CMaterial.h
- * \brief  Holds the directx stuff for uploading sprite specific data to the shader.
- * 
- * \author Arrien Bidmead
- * \date   January 2022
- *********************************************************************/
-
 #pragma once
 #include "Cerberus\Core\Engine.h"
 
@@ -19,7 +11,6 @@ struct _Material
 		, tint(0, 0, 0, 0)
 		, padding2()
 		, padding1()
-		, translucent(false)
 	{}
 
 	int			UseTexture;
@@ -29,8 +20,7 @@ struct _Material
 	XMUINT2		textureRect;
 
 	XMFLOAT2	textureOffset;
-	int			translucent;
-	float		padding2;
+	float		padding2[2];
 
 	XMFLOAT4	tint;
 };
@@ -40,9 +30,7 @@ struct MaterialPropertiesConstantBuffer
 	_Material   Material;
 };
 
-/**
- * Holds the directx stuff for uploading sprite specific data to the shader.
- */
+//Hold the directx stuff for uploading sprite specific data to the shader
 struct CMaterial
 {
 	MaterialPropertiesConstantBuffer material;
