@@ -1,10 +1,12 @@
 #include "CT_EditorGrid.h"
 #include "Cerberus\Core\Components\CSpriteComponent.h"
 #include "Cerberus\Core\Environment/CGridCursor.h"
+#include "Cerberus/Core/Components/CCameraComponent.h"
 
 CT_EditorGrid::CT_EditorGrid()
 {
 	gridSprite = AddComponent<CSpriteComponent>();
+	cursorEntity = nullptr;
 	
 }
 
@@ -14,14 +16,15 @@ void CT_EditorGrid::Update(float deltaTime)
 
 }
 
-void CT_EditorGrid::SetupGrid()
+void CT_EditorGrid::SetupGrid(CCameraComponent* cam)
 {
 	
 	//Instantiate the grid cursor
-	Engine::CreateEntity<CGridCursor>();
+	CGridCursor* gridCursor = Engine::CreateEntity<CGridCursor>();
+	
 
 	//Setup the editor grid visuals
-	gridSprite->LoadTexture("Resources\\Tiles\\GridCell.dds");
+	gridSprite->LoadTexture("Resources/Tiles/GridCell.dds");
 	gridSprite->SetRenderRect(XMUINT2(tileScale * mapScale, tileScale * mapScale));
 	gridSprite->SetSpriteSize(XMUINT2(tileScale * mapScale, tileScale * mapScale));
 	gridSprite->SetTextureOffset(XMFLOAT2(0, 0));
@@ -34,6 +37,12 @@ void CT_EditorGrid::SetupGrid()
 	SetPosition(tempPos);
 	SetScale(Vector3(2, 2, 2));
 	
+
+}
+
+CT_EditorGrid::~CT_EditorGrid()
+{
+	Engine::DestroyEntity(cursorEntity);
 
 }
 

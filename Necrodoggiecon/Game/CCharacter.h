@@ -1,6 +1,7 @@
 #pragma once
-#include <Cerberus\Core\Components\CSpriteComponent.h>
+#include <Cerberus\Core\Components\CAnimationSpriteComponent.h>
 #include <Cerberus\Core\CEntity.h>
+#include "weapons.h"
 
 class CEquippedItem;
 struct PickupItemData;
@@ -9,7 +10,8 @@ class CCharacter : public CEntity
 {
 private:
 protected:
-	CSpriteComponent* spriteComponent = nullptr;
+	CAnimationSpriteComponent* spriteComponent = nullptr;
+	Weapon* weaponComponent = nullptr;
 
 	/** 
 	* Virtual function 
@@ -37,5 +39,8 @@ public:
 	virtual void Equip(CEquippedItem* itemToEquip);
 
 	virtual void UsePickup(PickupItemData* itemToPickup);
+	CCharacter();
+	virtual ~CCharacter();
+
 };
 
