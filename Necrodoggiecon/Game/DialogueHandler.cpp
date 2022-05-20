@@ -48,6 +48,7 @@ void DialogueHandler::LoadDialogue(const std::string& jsonPath, const std::strin
 		Debug::LogError(errorMessage.c_str());
 		return;
 	}
+	
 	nlohmann::json storedFile;
 	file >> storedFile;
 
