@@ -177,7 +177,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\CPickupItem.h" />
-    <ClInclude Include="Game\EquippableItemData.h" />
     <ClInclude Include="Game\AI\CAICharacter.h" />
     <ClInclude Include="Game\AI\CAIController.h" />
     <ClInclude Include="Game\AI\CAINode.h" />
@@ -190,7 +189,6 @@
     <ClInclude Include="Game\EquippableItemData.h" />
     <ClInclude Include="Game\ItemData.h" />
     <ClInclude Include="Game\ItemDatabase.h" />
-    <ClInclude Include="Game\PickupItemData.h" />
     <ClInclude Include="Game\testCharacter.h" />
     <ClInclude Include="Game\testCharacter2.h" />
     <ClInclude Include="Game\testClass.h" />

@@ -154,6 +154,7 @@ void testCharacter::UsePickup(PickupItemData* itemToPickup)
 	}
 
 	Engine::DestroyEntity(equippedItem);
+	equippedItem = nullptr;
 }
 
 /** 
