@@ -10,7 +10,6 @@
 #include <Necrodoggiecon\Game\PlayerCharacter.h>
 #include <Cerberus\Core\Components\CCameraComponent.h>
 #include "Cerberus/Core/Utility/CameraManager/CameraManager.h"
-#include <Cerberus/Core/Structs/CCamera.h>
 #include "Cerberus/WorldConstants.h"
 
 

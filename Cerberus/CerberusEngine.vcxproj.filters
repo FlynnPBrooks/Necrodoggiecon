@@ -27,7 +27,6 @@
       <Filter>World</Filter>
     </ClCompile>
     <ClCompile Include="Core\Utility\EventSystem\EventSystem.cpp" />
-    <ClCompile Include="Core\Structs\CCamera.cpp" />
     <ClCompile Include="Core\Utility\CTransform.cpp" />
     <ClCompile Include="Core\Utility\Audio\AudioController.cpp" />
     <ClCompile Include="Core\Components\CTextRenderComponent.cpp" />
@@ -62,7 +61,6 @@
     <ClCompile Include="Core\AI\Pathfinding.cpp" />
     <ClCompile Include="Core\AI\CAIController.cpp" />
     <ClCompile Include="Core\Utility\EntityManager.cpp" />
-    <ClCompile Include="Core\Components\CRigidBodyComponent.cpp" />
     <ClCompile Include="Core\UI\CWidget_Button.cpp" />
     <ClCompile Include="Core\UI\CWidget.cpp" />
     <ClCompile Include="Core\UI\CWidget_Image.cpp" />
@@ -108,7 +106,6 @@
       <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="Core\Utility\EventSystem\EventSystem.h" />
-    <ClInclude Include="Core\Structs\CCamera.h" />
     <ClInclude Include="Core\Utility\CTransform.h" />
     <ClInclude Include="Core\Utility\Audio\AudioController.h" />
     <ClInclude Include="Core\Utility\Audio\CAudio.h" />
@@ -152,7 +149,6 @@
     <ClInclude Include="Core\AI\CAINode.h" />
     <ClInclude Include="Core\AI\CAIController.h" />
     <ClInclude Include="Core\Utility\EntityManager.h" />
-    <ClInclude Include="Core\Components\CRigidBodyComponent.h" />
     <ClInclude Include="Core\UI\CWidget_Button.h" />
     <ClInclude Include="Core\UI\CWidget.h" />
     <ClInclude Include="Core\UI\CWidget_Image.h" />

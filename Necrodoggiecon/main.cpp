@@ -1,14 +1,11 @@
 #include "Cerberus\Core\Engine.h"
 #include <Cerberus\Core\Environment\CWorld.h>
 #include "Necrodoggiecon/CWorld_Game.h"
-#include "Necrodoggiecon\Game\CPlayer.h"
 #include <Necrodoggiecon\Game\TestUI.h>
 #include <Necrodoggiecon\Game\CursorEntity.h>
 #include <Necrodoggiecon\Game\PlayerController.h>
 #include <Necrodoggiecon\Game\PlayerCharacter.h>
-#include <Necrodoggiecon\Game\ItemDatabase.h>
 #include <Cerberus/Core/AI/CAIController.h>
-#include <Cerberus/Core/Structs/CCamera.h>
 #include <Cerberus/Core/Utility/CWorldManager.h>
 #include <Cerberus\Core\Components\CCameraComponent.h>
 #include "Cerberus/Core/Utility/CameraManager/CameraManager.h"
@@ -85,11 +82,6 @@ int Start()
 
 	interactable->SetPosition(-500, 0, 0);
 
-	// Free Camera not locked to player.
-	CCamera* freeCamera = Engine::CreateEntity<CCamera>();
-	CCameraComponent* freeCameraComponent = freeCamera->AddComponent<CCameraComponent>();
-	freeCameraComponent->SetAttachedToParent(false);
-
 	CWorldManager::LoadWorld(new CWorld_Game(0));
 
 	//CUIManager::AddCanvas(Engine::CreateEntity<MainMenu>(), "MainMenu");
@@ -102,8 +94,6 @@ int Start()
 	t->SetPosition(XMFLOAT3(0, 0, -100));
 	t = Engine::CreateEntity<CursorEntity>();
 	t->SetPosition(XMFLOAT3(0, 0, -110));
-
-	CDroppedItem* droppedItem = ItemDatabase::CreateDroppedItemFromID(0);
 
 
 	/*Engine::CreateEntity<GruntEnemy>();

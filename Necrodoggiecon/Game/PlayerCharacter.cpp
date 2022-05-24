@@ -1,6 +1,4 @@
 #include "PlayerCharacter.h"
-#include "CDroppedItem.h"
-#include "CEquippedItem.h"
 #include "Cerberus/Core/Utility/Math/Math.h"
 #include "Cerberus\Core\Components\CCameraComponent.h"
 #include "Necrodoggiecon/Game/PlayerController.h"
@@ -63,20 +61,12 @@ void PlayerCharacter::PressedVertical(int dir, float deltaTime)
 
 void PlayerCharacter::PressedInteract()
 {
-	if (droppedItem == nullptr) return;
-
-	equippedItem = droppedItem->OnEquip(this);
-	Engine::DestroyEntity(droppedItem);
-	droppedItem = nullptr;
+	
 }
 
 void PlayerCharacter::PressedDrop()
 {
-	if (equippedItem == nullptr) return;
 
-	droppedItem = equippedItem->Drop();
-	Engine::DestroyEntity(equippedItem);
-	equippedItem = nullptr;
 }
 
 void PlayerCharacter::Attack()

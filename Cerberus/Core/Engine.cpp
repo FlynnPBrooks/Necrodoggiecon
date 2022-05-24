@@ -18,7 +18,6 @@
 #include "Cerberus\Core\Engine.h"
 #include "Cerberus\Core\Environment/CTile.h"
 #include "Cerberus\Core\Environment/CWorld_Edit.h"
-#include "Cerberus\Core\Structs\CCamera.h"
 #include "Cerberus\Tools/CT_EditorMain.h"
 #include "Cerberus/Core/Utility/Audio/AudioController.h"
 #include "Cerberus/Core/Utility/EventSystem/EventSystem.h"

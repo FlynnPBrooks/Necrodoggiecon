@@ -2,7 +2,6 @@
 #include "Cerberus\Core\Components\CSpriteComponent.h"
 #include "Cerberus\Core\Environment\CWorld_Edit.h"
 #include "Cerberus\Core\Engine.h"
-#include "Cerberus\Core\Structs\CCamera.h"
 #include "Cerberus\Dependencies\IMGUI\imgui.h"
 #include "Cerberus\Core\Utility\CWorldManager.h"
 #include <DirectXMath.h>

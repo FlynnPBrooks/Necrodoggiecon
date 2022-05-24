@@ -389,13 +389,11 @@
     <ClInclude Include="Core\Entities\CParticle.h" />
     <ClInclude Include="Core\Utility\Math\Math.h" />
     <ClInclude Include="Core\Components\CAudioEmitterComponent.h" />
-    <ClInclude Include="Core\Structs\CCamera.h" />
     <ClInclude Include="Core\CEntity.h" />
     <ClInclude Include="Core\Environment\CGridCursor.h" />
     <ClInclude Include="Core\Structs\CMaterial.h" />
     <ClInclude Include="Core\Components\CTextRenderComponent.h" />
     <ClInclude Include="Core\Utility\EntityManager.h" />
-    <ClInclude Include="Core\Components\CRigidBodyComponent.h" />
     <ClInclude Include="Tools\CT_EditorGrid.h" />
     <ClInclude Include="Core\Environment\CWorld_Edit.h" />
     <ClInclude Include="Core\Environment\IInputable.h" />
@@ -459,7 +457,6 @@
     <ClCompile Include="Core\Entities\CParticle.cpp" />
     <ClCompile Include="Core\Components\CAudioEmitterComponent.cpp" />
     <ClCompile Include="Core\Engine.cpp" />
-    <ClCompile Include="Core\Structs\CCamera.cpp" />
     <ClCompile Include="Core\CComponent.cpp" />
     <ClCompile Include="Core\CEntity.cpp" />
     <ClCompile Include="Core\Environment\CGridCursor.cpp" />
@@ -467,7 +464,6 @@
     <ClCompile Include="Core\Components\CTextRenderComponent.cpp" />
     <ClCompile Include="Core\Utility\Math\Math.cpp" />
     <ClCompile Include="Core\Utility\EntityManager.cpp" />
-    <ClCompile Include="Core\Components\CRigidBodyComponent.cpp" />
     <ClCompile Include="Tools\CT_EditorGrid.cpp" />
     <ClCompile Include="Core\Environment\CWorld_Edit.cpp" />
     <ClCompile Include="Dependencies\Microsoft\DirectXHelpers.cpp" />
