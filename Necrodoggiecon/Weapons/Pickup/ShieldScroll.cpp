@@ -2,7 +2,7 @@
 
 ShieldScroll::ShieldScroll()
 {
-	Weapon::SetWeapon(10);
+	Weapon::SetWeapon("ShieldScroll");
 }
 
 ShieldScroll::~ShieldScroll()
